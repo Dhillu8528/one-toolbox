@@ -47,6 +47,16 @@ All colors MUST be HSL.
     --text-light: 142 76% 95%;
     --ai: 25 95% 53%;
     --ai-light: 25 95% 95%;
+    --video: 340 82% 60%;
+    --video-light: 340 82% 95%;
+    --developer: 160 84% 39%;
+    --developer-light: 160 84% 95%;
+    --productivity: 40 96% 60%;
+    --productivity-light: 40 96% 95%;
+    --link: 199 89% 48%;
+    --link-light: 199 89% 95%;
+    --misc: 280 67% 60%;
+    --misc-light: 280 67% 95%;
 
     --border: 220 17% 90%;
     --input: 220 17% 90%;
@@ -117,6 +127,16 @@ All colors MUST be HSL.
     --text-light: 142 76% 15%;
     --ai: 25 95% 53%;
     --ai-light: 25 95% 15%;
+    --video: 340 82% 60%;
+    --video-light: 340 82% 15%;
+    --developer: 160 84% 49%;
+    --developer-light: 160 84% 15%;
+    --productivity: 40 96% 60%;
+    --productivity-light: 40 96% 15%;
+    --link: 199 89% 58%;
+    --link-light: 199 89% 15%;
+    --misc: 280 67% 60%;
+    --misc-light: 280 67% 15%;
 
     --border: 220 20% 20%;
     --input: 220 20% 20%;

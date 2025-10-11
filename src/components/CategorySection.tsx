@@ -5,7 +5,7 @@ interface CategorySectionProps {
   id: string;
   title: string;
   description: string;
-  color: "pdf" | "image" | "text" | "ai";
+  color: "pdf" | "image" | "text" | "ai" | "video" | "developer" | "productivity" | "link" | "misc";
   icon: LucideIcon;
   children: React.ReactNode;
 }
@@ -23,6 +23,11 @@ export const CategorySection = ({
     image: "text-image",
     text: "text-text",
     ai: "text-ai",
+    video: "text-video",
+    developer: "text-developer",
+    productivity: "text-productivity",
+    link: "text-link",
+    misc: "text-misc",
   };
 
   const bgClasses = {
@@ -30,6 +35,11 @@ export const CategorySection = ({
     image: "bg-image/10",
     text: "bg-text/10",
     ai: "bg-ai/10",
+    video: "bg-video/10",
+    developer: "bg-developer/10",
+    productivity: "bg-productivity/10",
+    link: "bg-link/10",
+    misc: "bg-misc/10",
   };
 
   return (

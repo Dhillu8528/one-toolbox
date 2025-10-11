@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 interface ToolCardProps {
   name: string;
   icon: LucideIcon;
-  category: "pdf" | "image" | "text" | "ai";
+  category: "pdf" | "image" | "text" | "ai" | "video" | "developer" | "productivity" | "link" | "misc";
 }
 
 export const ToolCard = ({ name, icon: Icon, category }: ToolCardProps) => {
@@ -14,6 +14,11 @@ export const ToolCard = ({ name, icon: Icon, category }: ToolCardProps) => {
     image: "bg-image-light hover:border-image text-image",
     text: "bg-text-light hover:border-text text-text",
     ai: "bg-ai-light hover:border-ai text-ai",
+    video: "bg-video-light hover:border-video text-video",
+    developer: "bg-developer-light hover:border-developer text-developer",
+    productivity: "bg-productivity-light hover:border-productivity text-productivity",
+    link: "bg-link-light hover:border-link text-link",
+    misc: "bg-misc-light hover:border-misc text-misc",
   };
 
   return (
@@ -30,7 +35,12 @@ export const ToolCard = ({ name, icon: Icon, category }: ToolCardProps) => {
           category === "pdf" && "bg-pdf/10",
           category === "image" && "bg-image/10",
           category === "text" && "bg-text/10",
-          category === "ai" && "bg-ai/10"
+          category === "ai" && "bg-ai/10",
+          category === "video" && "bg-video/10",
+          category === "developer" && "bg-developer/10",
+          category === "productivity" && "bg-productivity/10",
+          category === "link" && "bg-link/10",
+          category === "misc" && "bg-misc/10"
         )}>
           <Icon className="w-6 h-6" />
         </div>

@@ -1,5 +1,4 @@
-import { Search, FileText, Image, Type, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Search, FileText, Image, Type, Sparkles, Video, Music, Code, Link2, Briefcase, Wrench } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { ToolCard } from "@/components/ToolCard";
 import { CategorySection } from "@/components/CategorySection";
@@ -7,23 +6,64 @@ import { CategorySection } from "@/components/CategorySection";
 const Index = () => {
   const pdfTools = [
     { name: "PDF to Word", icon: FileText, category: "pdf" as const },
+    { name: "Word to PDF", icon: FileText, category: "pdf" as const },
     { name: "Merge PDF", icon: FileText, category: "pdf" as const },
+    { name: "Split PDF", icon: FileText, category: "pdf" as const },
     { name: "Compress PDF", icon: FileText, category: "pdf" as const },
+    { name: "Rotate PDF", icon: FileText, category: "pdf" as const },
+    { name: "Unlock PDF", icon: FileText, category: "pdf" as const },
+    { name: "Protect PDF", icon: FileText, category: "pdf" as const },
     { name: "PDF to JPG", icon: FileText, category: "pdf" as const },
+    { name: "JPG to PDF", icon: FileText, category: "pdf" as const },
+    { name: "Excel to PDF", icon: FileText, category: "pdf" as const },
+    { name: "PowerPoint to PDF", icon: FileText, category: "pdf" as const },
+    { name: "PDF to Text", icon: FileText, category: "pdf" as const },
+    { name: "Organize PDF", icon: FileText, category: "pdf" as const },
+  ];
+
+  const documentTools = [
+    { name: "Docx to Txt", icon: FileText, category: "pdf" as const },
+    { name: "Txt to PDF", icon: FileText, category: "pdf" as const },
+    { name: "Excel to CSV", icon: FileText, category: "pdf" as const },
+    { name: "CSV to Excel", icon: FileText, category: "pdf" as const },
+    { name: "OCR Tool", icon: FileText, category: "pdf" as const },
+    { name: "Scan to PDF", icon: FileText, category: "pdf" as const },
+    { name: "File Renamer", icon: FileText, category: "pdf" as const },
+    { name: "File Metadata Viewer", icon: FileText, category: "pdf" as const },
   ];
 
   const imageTools = [
     { name: "Resize Image", icon: Image, category: "image" as const },
     { name: "Compress Image", icon: Image, category: "image" as const },
-    { name: "Convert Format", icon: Image, category: "image" as const },
     { name: "Crop Image", icon: Image, category: "image" as const },
+    { name: "JPG to PNG", icon: Image, category: "image" as const },
+    { name: "PNG to WEBP", icon: Image, category: "image" as const },
+    { name: "HEIC to JPG", icon: Image, category: "image" as const },
+    { name: "SVG to PNG", icon: Image, category: "image" as const },
+    { name: "Flip Image", icon: Image, category: "image" as const },
+    { name: "Rotate Image", icon: Image, category: "image" as const },
+    { name: "Add Watermark", icon: Image, category: "image" as const },
+    { name: "Grayscale", icon: Image, category: "image" as const },
+    { name: "Image to Base64", icon: Image, category: "image" as const },
+    { name: "Background Remover", icon: Image, category: "image" as const },
+    { name: "AI Image Upscaler", icon: Image, category: "image" as const },
+    { name: "Image Colorizer", icon: Image, category: "image" as const },
+    { name: "Meme Generator", icon: Image, category: "image" as const },
   ];
 
   const textTools = [
     { name: "Word Counter", icon: Type, category: "text" as const },
+    { name: "Character Counter", icon: Type, category: "text" as const },
     { name: "Case Converter", icon: Type, category: "text" as const },
+    { name: "Remove Extra Spaces", icon: Type, category: "text" as const },
+    { name: "Find & Replace", icon: Type, category: "text" as const },
     { name: "Text Diff", icon: Type, category: "text" as const },
     { name: "Remove Duplicates", icon: Type, category: "text" as const },
+    { name: "Binary to Text", icon: Type, category: "text" as const },
+    { name: "Morse to Text", icon: Type, category: "text" as const },
+    { name: "Base64 to Text", icon: Type, category: "text" as const },
+    { name: "Synonym Finder", icon: Type, category: "text" as const },
+    { name: "Keyword Extractor", icon: Type, category: "text" as const },
   ];
 
   const aiTools = [
@@ -31,6 +71,85 @@ const Index = () => {
     { name: "Content Generator", icon: Sparkles, category: "ai" as const },
     { name: "Grammar Check", icon: Sparkles, category: "ai" as const },
     { name: "Translator", icon: Sparkles, category: "ai" as const },
+    { name: "Paraphraser", icon: Sparkles, category: "ai" as const },
+    { name: "Article Rewriter", icon: Sparkles, category: "ai" as const },
+    { name: "Caption Generator", icon: Sparkles, category: "ai" as const },
+    { name: "Hashtag Generator", icon: Sparkles, category: "ai" as const },
+    { name: "Text to Speech", icon: Sparkles, category: "ai" as const },
+    { name: "Speech to Text", icon: Sparkles, category: "ai" as const },
+    { name: "Poem Generator", icon: Sparkles, category: "ai" as const },
+    { name: "Story Writer", icon: Sparkles, category: "ai" as const },
+    { name: "Blog Generator", icon: Sparkles, category: "ai" as const },
+    { name: "AI Image Generator", icon: Sparkles, category: "ai" as const },
+    { name: "AI Chatbot", icon: Sparkles, category: "ai" as const },
+    { name: "Voice Cloner", icon: Sparkles, category: "ai" as const },
+  ];
+
+  const videoTools = [
+    { name: "MP4 to MP3", icon: Video, category: "video" as const },
+    { name: "AVI to MP4", icon: Video, category: "video" as const },
+    { name: "MOV to MP4", icon: Video, category: "video" as const },
+    { name: "Video Cutter", icon: Video, category: "video" as const },
+    { name: "Video Compressor", icon: Video, category: "video" as const },
+    { name: "Merge Videos", icon: Video, category: "video" as const },
+    { name: "Add Subtitles", icon: Video, category: "video" as const },
+    { name: "Crop Video", icon: Video, category: "video" as const },
+    { name: "Audio Cutter", icon: Music, category: "video" as const },
+    { name: "Audio Joiner", icon: Music, category: "video" as const },
+    { name: "WAV to MP3", icon: Music, category: "video" as const },
+    { name: "Voice Recorder", icon: Music, category: "video" as const },
+  ];
+
+  const developerTools = [
+    { name: "HTML Formatter", icon: Code, category: "developer" as const },
+    { name: "CSS Beautifier", icon: Code, category: "developer" as const },
+    { name: "JS Minifier", icon: Code, category: "developer" as const },
+    { name: "JSON Formatter", icon: Code, category: "developer" as const },
+    { name: "XML to JSON", icon: Code, category: "developer" as const },
+    { name: "JSON to CSV", icon: Code, category: "developer" as const },
+    { name: "Code Diff Checker", icon: Code, category: "developer" as const },
+    { name: "Regex Tester", icon: Code, category: "developer" as const },
+    { name: "Markdown Previewer", icon: Code, category: "developer" as const },
+    { name: "Base64 Encoder", icon: Code, category: "developer" as const },
+    { name: "Color Picker", icon: Code, category: "developer" as const },
+    { name: "Gradient Generator", icon: Code, category: "developer" as const },
+    { name: "Lorem Ipsum", icon: Code, category: "developer" as const },
+    { name: "IP Lookup", icon: Code, category: "developer" as const },
+  ];
+
+  const productivityTools = [
+    { name: "Resume Builder", icon: Briefcase, category: "productivity" as const },
+    { name: "Invoice Generator", icon: Briefcase, category: "productivity" as const },
+    { name: "Cover Letter", icon: Briefcase, category: "productivity" as const },
+    { name: "Receipt Maker", icon: Briefcase, category: "productivity" as const },
+    { name: "Stopwatch", icon: Briefcase, category: "productivity" as const },
+    { name: "Countdown Timer", icon: Briefcase, category: "productivity" as const },
+    { name: "Time Zone Converter", icon: Briefcase, category: "productivity" as const },
+    { name: "Age Calculator", icon: Briefcase, category: "productivity" as const },
+    { name: "Currency Converter", icon: Briefcase, category: "productivity" as const },
+    { name: "Loan Calculator", icon: Briefcase, category: "productivity" as const },
+    { name: "Unit Converter", icon: Briefcase, category: "productivity" as const },
+    { name: "Plagiarism Checker", icon: Briefcase, category: "productivity" as const },
+  ];
+
+  const linkTools = [
+    { name: "URL Shortener", icon: Link2, category: "link" as const },
+    { name: "QR Code Generator", icon: Link2, category: "link" as const },
+    { name: "Barcode Generator", icon: Link2, category: "link" as const },
+    { name: "URL Expander", icon: Link2, category: "link" as const },
+    { name: "UTM Builder", icon: Link2, category: "link" as const },
+    { name: "QR Code with Logo", icon: Link2, category: "link" as const },
+  ];
+
+  const miscTools = [
+    { name: "Password Generator", icon: Wrench, category: "misc" as const },
+    { name: "Username Generator", icon: Wrench, category: "misc" as const },
+    { name: "Random Number", icon: Wrench, category: "misc" as const },
+    { name: "Random Picker", icon: Wrench, category: "misc" as const },
+    { name: "Instagram Bio", icon: Wrench, category: "misc" as const },
+    { name: "Tweet Generator", icon: Wrench, category: "misc" as const },
+    { name: "BMI Calculator", icon: Wrench, category: "misc" as const },
+    { name: "Calorie Calculator", icon: Wrench, category: "misc" as const },
   ];
 
   return (
@@ -42,11 +161,17 @@ const Index = () => {
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent" />
             <h1 className="text-xl font-bold">ToolBox</h1>
           </div>
-          <nav className="hidden md:flex gap-6">
-            <a href="#pdf" className="text-sm font-medium hover:text-primary transition-colors">PDF Tools</a>
-            <a href="#image" className="text-sm font-medium hover:text-primary transition-colors">Image Tools</a>
-            <a href="#text" className="text-sm font-medium hover:text-primary transition-colors">Text Tools</a>
-            <a href="#ai" className="text-sm font-medium hover:text-primary transition-colors">AI Utilities</a>
+          <nav className="hidden md:flex gap-4 text-xs lg:text-sm">
+            <a href="#pdf" className="font-medium hover:text-primary transition-colors">PDF</a>
+            <a href="#document" className="font-medium hover:text-primary transition-colors">Documents</a>
+            <a href="#image" className="font-medium hover:text-primary transition-colors">Images</a>
+            <a href="#text" className="font-medium hover:text-primary transition-colors">Text</a>
+            <a href="#ai" className="font-medium hover:text-primary transition-colors">AI</a>
+            <a href="#video" className="font-medium hover:text-primary transition-colors">Video/Audio</a>
+            <a href="#developer" className="font-medium hover:text-primary transition-colors">Developer</a>
+            <a href="#productivity" className="font-medium hover:text-primary transition-colors">Productivity</a>
+            <a href="#link" className="font-medium hover:text-primary transition-colors">Links/QR</a>
+            <a href="#misc" className="font-medium hover:text-primary transition-colors">More</a>
           </nav>
         </div>
       </header>
@@ -87,9 +212,23 @@ const Index = () => {
         </CategorySection>
 
         <CategorySection 
+          id="document"
+          title="Document Tools"
+          description="Convert and manage various document formats"
+          color="pdf"
+          icon={FileText}
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {documentTools.map((tool) => (
+              <ToolCard key={tool.name} {...tool} />
+            ))}
+          </div>
+        </CategorySection>
+
+        <CategorySection 
           id="image"
           title="Image Tools"
-          description="Resize, compress, and convert images"
+          description="Edit, convert, and enhance images with AI"
           color="image"
           icon={Image}
         >
@@ -103,7 +242,7 @@ const Index = () => {
         <CategorySection 
           id="text"
           title="Text Tools"
-          description="Manipulate and analyze text content"
+          description="Manipulate, analyze, and transform text content"
           color="text"
           icon={Type}
         >
@@ -117,12 +256,82 @@ const Index = () => {
         <CategorySection 
           id="ai"
           title="AI Utilities"
-          description="AI-powered tools for content and analysis"
+          description="AI-powered tools for content creation and automation"
           color="ai"
           icon={Sparkles}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {aiTools.map((tool) => (
+              <ToolCard key={tool.name} {...tool} />
+            ))}
+          </div>
+        </CategorySection>
+
+        <CategorySection 
+          id="video"
+          title="Video & Audio Tools"
+          description="Convert, edit, and process video and audio files"
+          color="video"
+          icon={Video}
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {videoTools.map((tool) => (
+              <ToolCard key={tool.name} {...tool} />
+            ))}
+          </div>
+        </CategorySection>
+
+        <CategorySection 
+          id="developer"
+          title="Developer Tools"
+          description="Code formatters, converters, and utilities"
+          color="developer"
+          icon={Code}
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {developerTools.map((tool) => (
+              <ToolCard key={tool.name} {...tool} />
+            ))}
+          </div>
+        </CategorySection>
+
+        <CategorySection 
+          id="productivity"
+          title="Productivity Tools"
+          description="Time, finance, and business utilities"
+          color="productivity"
+          icon={Briefcase}
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {productivityTools.map((tool) => (
+              <ToolCard key={tool.name} {...tool} />
+            ))}
+          </div>
+        </CategorySection>
+
+        <CategorySection 
+          id="link"
+          title="Link & QR Tools"
+          description="URL shorteners, QR codes, and tracking"
+          color="link"
+          icon={Link2}
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {linkTools.map((tool) => (
+              <ToolCard key={tool.name} {...tool} />
+            ))}
+          </div>
+        </CategorySection>
+
+        <CategorySection 
+          id="misc"
+          title="Miscellaneous Tools"
+          description="Generators, calculators, and fun utilities"
+          color="misc"
+          icon={Wrench}
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {miscTools.map((tool) => (
               <ToolCard key={tool.name} {...tool} />
             ))}
           </div>

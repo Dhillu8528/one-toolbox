@@ -72,6 +72,26 @@ export default {
           DEFAULT: "hsl(var(--ai))",
           light: "hsl(var(--ai-light))",
         },
+        video: {
+          DEFAULT: "hsl(var(--video))",
+          light: "hsl(var(--video-light))",
+        },
+        developer: {
+          DEFAULT: "hsl(var(--developer))",
+          light: "hsl(var(--developer-light))",
+        },
+        productivity: {
+          DEFAULT: "hsl(var(--productivity))",
+          light: "hsl(var(--productivity-light))",
+        },
+        link: {
+          DEFAULT: "hsl(var(--link))",
+          light: "hsl(var(--link-light))",
+        },
+        misc: {
+          DEFAULT: "hsl(var(--misc))",
+          light: "hsl(var(--misc-light))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
