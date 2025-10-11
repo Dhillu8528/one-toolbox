@@ -1,0 +1,41 @@
+import { LucideIcon } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+
+interface ToolCardProps {
+  name: string;
+  icon: LucideIcon;
+  category: "pdf" | "image" | "text" | "ai";
+}
+
+export const ToolCard = ({ name, icon: Icon, category }: ToolCardProps) => {
+  const categoryColors = {
+    pdf: "bg-pdf-light hover:border-pdf text-pdf",
+    image: "bg-image-light hover:border-image text-image",
+    text: "bg-text-light hover:border-text text-text",
+    ai: "bg-ai-light hover:border-ai text-ai",
+  };
+
+  return (
+    <Card 
+      className={cn(
+        "group p-6 cursor-pointer transition-all duration-300 hover:shadow-[var(--shadow-hover)] border-2",
+        "hover:scale-105 hover:-translate-y-1",
+        categoryColors[category]
+      )}
+    >
+      <div className="flex flex-col items-center text-center gap-3">
+        <div className={cn(
+          "p-3 rounded-xl transition-transform duration-300 group-hover:scale-110",
+          category === "pdf" && "bg-pdf/10",
+          category === "image" && "bg-image/10",
+          category === "text" && "bg-text/10",
+          category === "ai" && "bg-ai/10"
+        )}>
+          <Icon className="w-6 h-6" />
+        </div>
+        <h3 className="font-semibold text-sm">{name}</h3>
+      </div>
+    </Card>
+  );
+};
