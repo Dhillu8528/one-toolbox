@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { ToolCard } from "@/components/ToolCard";
 import { CategorySection } from "@/components/CategorySection";
 import { DarkModeToggle } from "@/components/DarkModeToggle";
+import { SuggestionsBox } from "@/components/SuggestionsBox";
 import { useEffect } from "react";
 
 const Index = () => {
@@ -355,6 +356,7 @@ const Index = () => {
           <p>© 2025 ToolBox. All your tools in one place.</p>
         </div>
       </footer>
+      <SuggestionsBox />
     </div>
   );
 };

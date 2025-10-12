@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, ScrollRestoration } from "react-router-dom";
 import { ThemeProvider } from "./components/ThemeProvider";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
@@ -11,6 +11,16 @@ import CaseConverter from "./pages/tools/CaseConverter";
 import ImageResize from "./pages/tools/ImageResize";
 import QRGenerator from "./pages/tools/QRGenerator";
 import ColorPickerTool from "./pages/tools/ColorPicker";
+import ImageCompressor from "./pages/tools/ImageCompressor";
+import PasswordGenerator from "./pages/tools/PasswordGenerator";
+import JSONFormatter from "./pages/tools/JSONFormatter";
+import UnitConverter from "./pages/tools/UnitConverter";
+import LoremIpsum from "./pages/tools/LoremIpsum";
+import AgeCalculator from "./pages/tools/AgeCalculator";
+import URLShortener from "./pages/tools/URLShortener";
+import Base64Tool from "./pages/tools/Base64Tool";
+import MarkdownPreview from "./pages/tools/MarkdownPreview";
+import HashGenerator from "./pages/tools/HashGenerator";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +38,16 @@ const App = () => (
             <Route path="/tools/image-resize" element={<ImageResize />} />
             <Route path="/tools/qr-generator" element={<QRGenerator />} />
             <Route path="/tools/color-picker" element={<ColorPickerTool />} />
+            <Route path="/tools/image-compressor" element={<ImageCompressor />} />
+            <Route path="/tools/password-generator" element={<PasswordGenerator />} />
+            <Route path="/tools/json-formatter" element={<JSONFormatter />} />
+            <Route path="/tools/unit-converter" element={<UnitConverter />} />
+            <Route path="/tools/lorem-ipsum" element={<LoremIpsum />} />
+            <Route path="/tools/age-calculator" element={<AgeCalculator />} />
+            <Route path="/tools/url-shortener" element={<URLShortener />} />
+            <Route path="/tools/base64-tool" element={<Base64Tool />} />
+            <Route path="/tools/markdown-preview" element={<MarkdownPreview />} />
+            <Route path="/tools/hash-generator" element={<HashGenerator />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

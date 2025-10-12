@@ -1,5 +1,5 @@
 import { ArrowLeft } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { DarkModeToggle } from "./DarkModeToggle";
 
@@ -10,16 +10,16 @@ interface ToolPageProps {
 }
 
 export const ToolPage = ({ title, description, children }: ToolPageProps) => {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-accent/5">
       <div className="container mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-8">
-          <Link to="/">
-            <Button variant="ghost" className="gap-2">
-              <ArrowLeft className="w-4 h-4" />
-              Back to Tools
-            </Button>
-          </Link>
+          <Button variant="ghost" className="gap-2" onClick={() => navigate(-1)}>
+            <ArrowLeft className="w-4 h-4" />
+            Back to Tools
+          </Button>
           <DarkModeToggle />
         </div>
         
