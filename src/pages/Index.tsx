@@ -2,8 +2,17 @@ import { Search, FileText, Image, Type, Sparkles, Video, Music, Code, Link2, Bri
 import { Input } from "@/components/ui/input";
 import { ToolCard } from "@/components/ToolCard";
 import { CategorySection } from "@/components/CategorySection";
+import { DarkModeToggle } from "@/components/DarkModeToggle";
+import { useEffect } from "react";
 
 const Index = () => {
+  useEffect(() => {
+    document.documentElement.style.scrollBehavior = 'smooth';
+    return () => {
+      document.documentElement.style.scrollBehavior = 'auto';
+    };
+  }, []);
+
   const pdfTools = [
     { name: "PDF to Word", icon: FileText, category: "pdf" as const },
     { name: "Word to PDF", icon: FileText, category: "pdf" as const },
@@ -33,7 +42,7 @@ const Index = () => {
   ];
 
   const imageTools = [
-    { name: "Resize Image", icon: Image, category: "image" as const },
+    { name: "Resize Image", icon: Image, category: "image" as const, href: "/tools/image-resize" },
     { name: "Compress Image", icon: Image, category: "image" as const },
     { name: "Crop Image", icon: Image, category: "image" as const },
     { name: "JPG to PNG", icon: Image, category: "image" as const },
@@ -52,9 +61,9 @@ const Index = () => {
   ];
 
   const textTools = [
-    { name: "Word Counter", icon: Type, category: "text" as const },
+    { name: "Word Counter", icon: Type, category: "text" as const, href: "/tools/word-counter" },
     { name: "Character Counter", icon: Type, category: "text" as const },
-    { name: "Case Converter", icon: Type, category: "text" as const },
+    { name: "Case Converter", icon: Type, category: "text" as const, href: "/tools/case-converter" },
     { name: "Remove Extra Spaces", icon: Type, category: "text" as const },
     { name: "Find & Replace", icon: Type, category: "text" as const },
     { name: "Text Diff", icon: Type, category: "text" as const },
@@ -111,7 +120,7 @@ const Index = () => {
     { name: "Regex Tester", icon: Code, category: "developer" as const },
     { name: "Markdown Previewer", icon: Code, category: "developer" as const },
     { name: "Base64 Encoder", icon: Code, category: "developer" as const },
-    { name: "Color Picker", icon: Code, category: "developer" as const },
+    { name: "Color Picker", icon: Code, category: "developer" as const, href: "/tools/color-picker" },
     { name: "Gradient Generator", icon: Code, category: "developer" as const },
     { name: "Lorem Ipsum", icon: Code, category: "developer" as const },
     { name: "IP Lookup", icon: Code, category: "developer" as const },
@@ -134,7 +143,7 @@ const Index = () => {
 
   const linkTools = [
     { name: "URL Shortener", icon: Link2, category: "link" as const },
-    { name: "QR Code Generator", icon: Link2, category: "link" as const },
+    { name: "QR Code Generator", icon: Link2, category: "link" as const, href: "/tools/qr-generator" },
     { name: "Barcode Generator", icon: Link2, category: "link" as const },
     { name: "URL Expander", icon: Link2, category: "link" as const },
     { name: "UTM Builder", icon: Link2, category: "link" as const },
@@ -155,41 +164,43 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
       {/* Header */}
-      <header className="border-b bg-card/80 backdrop-blur-sm sticky top-0 z-50">
+      <header className="border-b bg-card/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent" />
-            <h1 className="text-xl font-bold">ToolBox</h1>
+          <div className="flex items-center gap-2 animate-fade-in">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary via-accent to-primary animate-pulse shadow-lg" />
+            <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">ToolBox</h1>
           </div>
           <nav className="hidden md:flex gap-4 text-xs lg:text-sm">
-            <a href="#pdf" className="font-medium hover:text-primary transition-colors">PDF</a>
-            <a href="#document" className="font-medium hover:text-primary transition-colors">Documents</a>
-            <a href="#image" className="font-medium hover:text-primary transition-colors">Images</a>
-            <a href="#text" className="font-medium hover:text-primary transition-colors">Text</a>
-            <a href="#ai" className="font-medium hover:text-primary transition-colors">AI</a>
-            <a href="#video" className="font-medium hover:text-primary transition-colors">Video/Audio</a>
-            <a href="#developer" className="font-medium hover:text-primary transition-colors">Developer</a>
-            <a href="#productivity" className="font-medium hover:text-primary transition-colors">Productivity</a>
-            <a href="#link" className="font-medium hover:text-primary transition-colors">Links/QR</a>
-            <a href="#misc" className="font-medium hover:text-primary transition-colors">More</a>
+            <a href="#pdf" className="font-medium hover:text-primary transition-colors hover:scale-110">PDF</a>
+            <a href="#document" className="font-medium hover:text-primary transition-colors hover:scale-110">Documents</a>
+            <a href="#image" className="font-medium hover:text-primary transition-colors hover:scale-110">Images</a>
+            <a href="#text" className="font-medium hover:text-primary transition-colors hover:scale-110">Text</a>
+            <a href="#ai" className="font-medium hover:text-primary transition-colors hover:scale-110">AI</a>
+            <a href="#video" className="font-medium hover:text-primary transition-colors hover:scale-110">Video/Audio</a>
+            <a href="#developer" className="font-medium hover:text-primary transition-colors hover:scale-110">Developer</a>
+            <a href="#productivity" className="font-medium hover:text-primary transition-colors hover:scale-110">Productivity</a>
+            <a href="#link" className="font-medium hover:text-primary transition-colors hover:scale-110">Links/QR</a>
+            <a href="#misc" className="font-medium hover:text-primary transition-colors hover:scale-110">More</a>
           </nav>
+          <DarkModeToggle />
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-16 md:py-24">
-        <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-in fade-in slide-in-from-bottom-4 duration-1000">
+      <section className="container mx-auto px-4 py-16 md:py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-transparent rounded-3xl blur-3xl" />
+        <div className="text-center max-w-3xl mx-auto relative">
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-fade-in">
             All Your Tools in One Place
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground mb-8 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-150">
+          <p className="text-lg md:text-xl text-muted-foreground mb-8 animate-fade-in [animation-delay:150ms]">
             Fast, secure, and easy-to-use online tools for PDF, images, text, and AI utilities
           </p>
-          <div className="relative max-w-xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+          <div className="relative max-w-xl mx-auto animate-fade-in [animation-delay:300ms]">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground pointer-events-none" />
             <Input 
               placeholder="Search for tools..." 
-              className="pl-12 h-14 text-lg bg-card shadow-lg border-2"
+              className="pl-12 h-14 text-lg bg-card shadow-lg border-2 hover:shadow-xl transition-shadow focus:scale-105 transition-transform"
             />
           </div>
         </div>
