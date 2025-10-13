@@ -34,8 +34,8 @@ copied.forEach((p) => mergedPdf.addPage(p));
 
 
 const out = await mergedPdf.save();
-const blob = new Blob([out], { type: "application/pdf" });
-saveAs(blob, "merged.pdf");
+      const blob = new Blob([new Uint8Array(out)], { type: "application/pdf" });
+      saveAs(blob, "merged.pdf");
 } catch (e) {
 console.error(e);
 alert("Merge failed. See console for details.");

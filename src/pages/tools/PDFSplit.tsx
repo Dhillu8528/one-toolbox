@@ -32,7 +32,7 @@ for (let i = start - 1; i <= end - 1; i++) indices.push(i);
 const pages = await out.copyPages(src, indices);
 pages.forEach((p) => out.addPage(p));
 const saved = await out.save();
-saveAs(new Blob([saved], { type: "application/pdf" }), `${file.name.replace(/\.pdf$/,"")}-pages-${start}-${end}.pdf`);
+    saveAs(new Blob([new Uint8Array(saved)], { type: "application/pdf" }), `${file.name.replace(/\.pdf$/,"")}-pages-${start}-${end}.pdf`);
 };
 
 

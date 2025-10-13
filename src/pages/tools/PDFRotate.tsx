@@ -14,16 +14,19 @@ export default function PDFRotate() {
     if (f) setFile(f);
   };
 
-  const handleRotate = async () => {
+const handleRotate = async () => {
     if (!file) return alert("Please upload a PDF first.");
 
     const arrayBuffer = await file.arrayBuffer();
-    const { PDFDocument } = await import("pdf-lib");
+    const { PDFDocument, degrees } = await import("pdf-lib");
     const pdfDoc = await PDFDocument.load(arrayBuffer);
     const pages = pdfDoc.getPages();
-    pages.forEach((page) => page.setRotation(page.getRotation().angle + angle));
+    pages.forEach((page) => {
+      const currentRotation = page.getRotation().angle;
+      page.setRotation(degrees(currentRotation + angle));
+    });
     const rotatedBytes = await pdfDoc.save();
-    const blob = new Blob([rotatedBytes], { type: "application/pdf" });
+    const blob = new Blob([new Uint8Array(rotatedBytes)], { type: "application/pdf" });
     const url = URL.createObjectURL(blob);
 
     const link = document.createElement("a");

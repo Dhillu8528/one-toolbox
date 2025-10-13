@@ -26,7 +26,7 @@ page.drawImage(img, { x: 0, y: 0, width: img.width, height: img.height });
 
 
 const bytes = await pdf.save();
-saveAs(new Blob([bytes], { type: "application/pdf" }), "images.pdf");
+    saveAs(new Blob([new Uint8Array(bytes)], { type: "application/pdf" }), "images.pdf");
 };
 
 
