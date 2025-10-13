@@ -21,6 +21,14 @@ import URLShortener from "./pages/tools/URLShortener";
 import Base64Tool from "./pages/tools/Base64Tool";
 import MarkdownPreview from "./pages/tools/MarkdownPreview";
 import HashGenerator from "./pages/tools/HashGenerator";
+import JPGToPDF from "./pages/tools/JPGToPDF";
+import JPGtoPNG from "./pages/tools/JPGtoPNG";
+import PNGtoWEBP from "./pages/tools/PNGtoWEBP";
+import ImageCropper from "./pages/tools/ImageCropper";
+import HEICtoJPG from "./pages/tools/HEICtoJPG";
+import PDFMerge from "./pages/tools/PDFMerge";
+import PDFSplit from "./pages/tools/PDFSplit";
+import PDFRotate from "./pages/tools/PDFRotate";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +39,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollRestoration />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/tools/word-counter" element={<WordCounter />} />
@@ -48,6 +57,14 @@ const App = () => (
             <Route path="/tools/base64-tool" element={<Base64Tool />} />
             <Route path="/tools/markdown-preview" element={<MarkdownPreview />} />
             <Route path="/tools/hash-generator" element={<HashGenerator />} />
+            <Route path="/tools/jpg-to-pdf" element={<JPGToPDF />} />
+            <Route path="/tools/jpg-to-png" element={<JPGtoPNG />} />
+            <Route path="/tools/png-to-webp" element={<PNGtoWEBP />} />
+            <Route path="/tools/image-cropper" element={<ImageCropper />} />
+            <Route path="/tools/heic-to-jpg" element={<HEICtoJPG />} />
+            <Route path="/tools/pdf-merge" element={<PDFMerge />} />
+            <Route path="/tools/pdf-split" element={<PDFSplit />} />
+            <Route path="/tools/pdf-rotate" element={<PDFRotate />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

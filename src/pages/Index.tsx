@@ -4,7 +4,7 @@ import { ToolCard } from "@/components/ToolCard";
 import { CategorySection } from "@/components/CategorySection";
 import { DarkModeToggle } from "@/components/DarkModeToggle";
 import { SuggestionsBox } from "@/components/SuggestionsBox";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Index = () => {
   useEffect(() => {
@@ -14,17 +14,20 @@ const Index = () => {
     };
   }, []);
 
+  const [query, setQuery] = useState("");
+  const filterByQuery = (list: any[]) => query ? list.filter((t: any) => t.name.toLowerCase().includes(query.toLowerCase())) : list;
+
   const pdfTools = [
     { name: "PDF to Word", icon: FileText, category: "pdf" as const },
     { name: "Word to PDF", icon: FileText, category: "pdf" as const },
-    { name: "Merge PDF", icon: FileText, category: "pdf" as const },
-    { name: "Split PDF", icon: FileText, category: "pdf" as const },
+    { name: "Merge PDF", icon: FileText, category: "pdf" as const, href: "/tools/pdf-merge" },
+    { name: "Split PDF", icon: FileText, category: "pdf" as const, href: "/tools/pdf-split" },
     { name: "Compress PDF", icon: FileText, category: "pdf" as const },
-    { name: "Rotate PDF", icon: FileText, category: "pdf" as const },
+    { name: "Rotate PDF", icon: FileText, category: "pdf" as const, href: "/tools/pdf-rotate" },
     { name: "Unlock PDF", icon: FileText, category: "pdf" as const },
     { name: "Protect PDF", icon: FileText, category: "pdf" as const },
     { name: "PDF to JPG", icon: FileText, category: "pdf" as const },
-    { name: "JPG to PDF", icon: FileText, category: "pdf" as const },
+    { name: "JPG to PDF", icon: FileText, category: "pdf" as const, href: "/tools/jpg-to-pdf" },
     { name: "Excel to PDF", icon: FileText, category: "pdf" as const },
     { name: "PowerPoint to PDF", icon: FileText, category: "pdf" as const },
     { name: "PDF to Text", icon: FileText, category: "pdf" as const },
@@ -44,17 +47,17 @@ const Index = () => {
 
   const imageTools = [
     { name: "Resize Image", icon: Image, category: "image" as const, href: "/tools/image-resize" },
-    { name: "Compress Image", icon: Image, category: "image" as const },
-    { name: "Crop Image", icon: Image, category: "image" as const },
-    { name: "JPG to PNG", icon: Image, category: "image" as const },
-    { name: "PNG to WEBP", icon: Image, category: "image" as const },
-    { name: "HEIC to JPG", icon: Image, category: "image" as const },
+    { name: "Compress Image", icon: Image, category: "image" as const, href: "/tools/image-compressor" },
+    { name: "Crop Image", icon: Image, category: "image" as const, href: "/tools/image-cropper" },
+    { name: "JPG to PNG", icon: Image, category: "image" as const, href: "/tools/jpg-to-png" },
+    { name: "PNG to WEBP", icon: Image, category: "image" as const, href: "/tools/png-to-webp" },
+    { name: "HEIC to JPG", icon: Image, category: "image" as const, href: "/tools/heic-to-jpg" },
     { name: "SVG to PNG", icon: Image, category: "image" as const },
     { name: "Flip Image", icon: Image, category: "image" as const },
     { name: "Rotate Image", icon: Image, category: "image" as const },
     { name: "Add Watermark", icon: Image, category: "image" as const },
     { name: "Grayscale", icon: Image, category: "image" as const },
-    { name: "Image to Base64", icon: Image, category: "image" as const },
+    { name: "Image to Base64", icon: Image, category: "image" as const, href: "/tools/base64-tool" },
     { name: "Background Remover", icon: Image, category: "image" as const },
     { name: "AI Image Upscaler", icon: Image, category: "image" as const },
     { name: "Image Colorizer", icon: Image, category: "image" as const },
@@ -114,16 +117,16 @@ const Index = () => {
     { name: "HTML Formatter", icon: Code, category: "developer" as const },
     { name: "CSS Beautifier", icon: Code, category: "developer" as const },
     { name: "JS Minifier", icon: Code, category: "developer" as const },
-    { name: "JSON Formatter", icon: Code, category: "developer" as const },
+    { name: "JSON Formatter", icon: Code, category: "developer" as const, href: "/tools/json-formatter" },
     { name: "XML to JSON", icon: Code, category: "developer" as const },
     { name: "JSON to CSV", icon: Code, category: "developer" as const },
     { name: "Code Diff Checker", icon: Code, category: "developer" as const },
     { name: "Regex Tester", icon: Code, category: "developer" as const },
-    { name: "Markdown Previewer", icon: Code, category: "developer" as const },
-    { name: "Base64 Encoder", icon: Code, category: "developer" as const },
+    { name: "Markdown Previewer", icon: Code, category: "developer" as const, href: "/tools/markdown-preview" },
+    { name: "Base64 Encoder", icon: Code, category: "developer" as const, href: "/tools/base64-tool" },
     { name: "Color Picker", icon: Code, category: "developer" as const, href: "/tools/color-picker" },
     { name: "Gradient Generator", icon: Code, category: "developer" as const },
-    { name: "Lorem Ipsum", icon: Code, category: "developer" as const },
+    { name: "Lorem Ipsum", icon: Code, category: "developer" as const, href: "/tools/lorem-ipsum" },
     { name: "IP Lookup", icon: Code, category: "developer" as const },
   ];
 
@@ -135,15 +138,15 @@ const Index = () => {
     { name: "Stopwatch", icon: Briefcase, category: "productivity" as const },
     { name: "Countdown Timer", icon: Briefcase, category: "productivity" as const },
     { name: "Time Zone Converter", icon: Briefcase, category: "productivity" as const },
-    { name: "Age Calculator", icon: Briefcase, category: "productivity" as const },
+    { name: "Age Calculator", icon: Briefcase, category: "productivity" as const, href: "/tools/age-calculator" },
     { name: "Currency Converter", icon: Briefcase, category: "productivity" as const },
     { name: "Loan Calculator", icon: Briefcase, category: "productivity" as const },
-    { name: "Unit Converter", icon: Briefcase, category: "productivity" as const },
+    { name: "Unit Converter", icon: Briefcase, category: "productivity" as const, href: "/tools/unit-converter" },
     { name: "Plagiarism Checker", icon: Briefcase, category: "productivity" as const },
   ];
 
   const linkTools = [
-    { name: "URL Shortener", icon: Link2, category: "link" as const },
+    { name: "URL Shortener", icon: Link2, category: "link" as const, href: "/tools/url-shortener" },
     { name: "QR Code Generator", icon: Link2, category: "link" as const, href: "/tools/qr-generator" },
     { name: "Barcode Generator", icon: Link2, category: "link" as const },
     { name: "URL Expander", icon: Link2, category: "link" as const },
@@ -199,8 +202,10 @@ const Index = () => {
           </p>
           <div className="relative max-w-xl mx-auto animate-fade-in [animation-delay:300ms]">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground pointer-events-none" />
-            <Input 
-              placeholder="Search for tools..." 
+            <Input
+              placeholder="Search for tools..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
               className="pl-12 h-14 text-lg bg-card shadow-lg border-2 hover:shadow-xl transition-shadow focus:scale-105 transition-transform"
             />
           </div>
@@ -217,7 +222,7 @@ const Index = () => {
           icon={FileText}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {pdfTools.map((tool) => (
+            {filterByQuery(pdfTools).map((tool) => (
               <ToolCard key={tool.name} {...tool} />
             ))}
           </div>
@@ -231,7 +236,7 @@ const Index = () => {
           icon={FileText}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {documentTools.map((tool) => (
+            {filterByQuery(documentTools).map((tool) => (
               <ToolCard key={tool.name} {...tool} />
             ))}
           </div>
@@ -245,7 +250,7 @@ const Index = () => {
           icon={Image}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {imageTools.map((tool) => (
+            {filterByQuery(imageTools).map((tool) => (
               <ToolCard key={tool.name} {...tool} />
             ))}
           </div>
@@ -259,7 +264,7 @@ const Index = () => {
           icon={Type}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {textTools.map((tool) => (
+            {filterByQuery(textTools).map((tool) => (
               <ToolCard key={tool.name} {...tool} />
             ))}
           </div>
@@ -273,7 +278,7 @@ const Index = () => {
           icon={Sparkles}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {aiTools.map((tool) => (
+            {filterByQuery(aiTools).map((tool) => (
               <ToolCard key={tool.name} {...tool} />
             ))}
           </div>
@@ -287,7 +292,7 @@ const Index = () => {
           icon={Video}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {videoTools.map((tool) => (
+            {filterByQuery(videoTools).map((tool) => (
               <ToolCard key={tool.name} {...tool} />
             ))}
           </div>
@@ -301,7 +306,7 @@ const Index = () => {
           icon={Code}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {developerTools.map((tool) => (
+            {filterByQuery(developerTools).map((tool) => (
               <ToolCard key={tool.name} {...tool} />
             ))}
           </div>
@@ -315,7 +320,7 @@ const Index = () => {
           icon={Briefcase}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {productivityTools.map((tool) => (
+            {filterByQuery(productivityTools).map((tool) => (
               <ToolCard key={tool.name} {...tool} />
             ))}
           </div>
@@ -329,7 +334,7 @@ const Index = () => {
           icon={Link2}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {linkTools.map((tool) => (
+            {filterByQuery(linkTools).map((tool) => (
               <ToolCard key={tool.name} {...tool} />
             ))}
           </div>
@@ -343,7 +348,7 @@ const Index = () => {
           icon={Wrench}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {miscTools.map((tool) => (
+            {filterByQuery(miscTools).map((tool) => (
               <ToolCard key={tool.name} {...tool} />
             ))}
           </div>

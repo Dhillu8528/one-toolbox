@@ -3,8 +3,7 @@ import FileUploader from "@/components/FileUploader";
 import { PDFDocument } from "pdf-lib";
 import { saveAs } from "file-saver";
 import { Button } from "@/components/ui/button";
-import { ToJPGToPDF.tsx
-olPage } from "@/components/ToolPage";
+import { ToolPage } from "@/components/ToolPage";
 
 
 export default function JPGToPDF() {
