@@ -51,5 +51,10 @@ export const ToolCard = ({ name, icon: Icon, category, href }: ToolCardProps) =>
     </Card>
   );
 
-  return href ? <Link to={href}>{CardContent}</Link> : CardContent;
+  return href ? <Link to={href}>{CardContent}</Link> : (
+    <div className="relative">
+      {CardContent}
+      <span className="absolute top-2 right-2 text-[10px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground border">Coming soon</span>
+    </div>
+  );
 };
