@@ -29,6 +29,9 @@ import HEICtoJPG from "./pages/tools/HEICtoJPG";
 import PDFMerge from "./pages/tools/PDFMerge";
 import PDFSplit from "./pages/tools/PDFSplit";
 import PDFRotate from "./pages/tools/PDFRotate";
+import PDFToWord from "./pages/tools/PDFToWord";
+import WordToPDF from "./pages/tools/WordToPDF";
+import PDFToJPG from "./pages/tools/PDFToJPG";
 
 const queryClient = new QueryClient();
 
@@ -64,6 +67,9 @@ const App = () => (
             <Route path="/tools/pdf-merge" element={<PDFMerge />} />
             <Route path="/tools/pdf-split" element={<PDFSplit />} />
             <Route path="/tools/pdf-rotate" element={<PDFRotate />} />
+            <Route path="/tools/pdf-to-word" element={<PDFToWord />} />
+            <Route path="/tools/word-to-pdf" element={<WordToPDF />} />
+            <Route path="/tools/pdf-to-jpg" element={<PDFToJPG />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

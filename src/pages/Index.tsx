@@ -18,15 +18,15 @@ const Index = () => {
   const filterByQuery = (list: any[]) => query ? list.filter((t: any) => t.name.toLowerCase().includes(query.toLowerCase())) : list;
 
   const pdfTools = [
-    { name: "PDF to Word", icon: FileText, category: "pdf" as const },
-    { name: "Word to PDF", icon: FileText, category: "pdf" as const },
+    { name: "PDF to Word", icon: FileText, category: "pdf" as const, href: "/tools/pdf-to-word" },
+    { name: "Word to PDF", icon: FileText, category: "pdf" as const, href: "/tools/word-to-pdf" },
     { name: "Merge PDF", icon: FileText, category: "pdf" as const, href: "/tools/pdf-merge" },
     { name: "Split PDF", icon: FileText, category: "pdf" as const, href: "/tools/pdf-split" },
     { name: "Compress PDF", icon: FileText, category: "pdf" as const },
     { name: "Rotate PDF", icon: FileText, category: "pdf" as const, href: "/tools/pdf-rotate" },
     { name: "Unlock PDF", icon: FileText, category: "pdf" as const },
     { name: "Protect PDF", icon: FileText, category: "pdf" as const },
-    { name: "PDF to JPG", icon: FileText, category: "pdf" as const },
+    { name: "PDF to JPG", icon: FileText, category: "pdf" as const, href: "/tools/pdf-to-jpg" },
     { name: "JPG to PDF", icon: FileText, category: "pdf" as const, href: "/tools/jpg-to-pdf" },
     { name: "Excel to PDF", icon: FileText, category: "pdf" as const },
     { name: "PowerPoint to PDF", icon: FileText, category: "pdf" as const },
