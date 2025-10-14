@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import JSZip from "jszip";
 // @ts-ignore - worker asset import
-import workerSrc from "pdfjs-dist/build/pdf.worker.min.js?url";
+import workerSrc from "pdfjs-dist/build/pdf.worker.mjs?url";
 import * as pdfjsLib from "pdfjs-dist";
 import { saveAs } from "file-saver";
 

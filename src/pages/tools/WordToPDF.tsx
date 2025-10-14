@@ -4,7 +4,7 @@ import FileUploader from "@/components/FileUploader";
 import { Button } from "@/components/ui/button";
 
 // @ts-ignore - mammoth types not bundled
-import * as mammoth from "mammoth";
+import * as mammoth from "mammoth/mammoth.browser";
 // @ts-ignore - html2pdf types not bundled
 import html2pdf from "html2pdf.js";
 

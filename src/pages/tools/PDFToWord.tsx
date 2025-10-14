@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { saveAs } from "file-saver";
 // pdfjs for text extraction
 // @ts-ignore - worker asset import
-import workerSrc from "pdfjs-dist/build/pdf.worker.min.js?url";
+import workerSrc from "pdfjs-dist/build/pdf.worker.mjs?url";
 import * as pdfjsLib from "pdfjs-dist";
 import { Document, Packer, Paragraph, HeadingLevel, TextRun } from "docx";
 
