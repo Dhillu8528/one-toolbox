@@ -155,7 +155,7 @@ const Index = () => {
   ];
 
   const miscTools = [
-    { name: "Password Generator", icon: Wrench, category: "misc" as const },
+    { name: "Password Generator", icon: Wrench, category: "misc" as const, href: "/tools/password-generator" },
     { name: "Username Generator", icon: Wrench, category: "misc" as const },
     { name: "Random Number", icon: Wrench, category: "misc" as const },
     { name: "Random Picker", icon: Wrench, category: "misc" as const },
@@ -163,6 +163,7 @@ const Index = () => {
     { name: "Tweet Generator", icon: Wrench, category: "misc" as const },
     { name: "BMI Calculator", icon: Wrench, category: "misc" as const },
     { name: "Calorie Calculator", icon: Wrench, category: "misc" as const },
+    { name: "Hash Generator", icon: Wrench, category: "misc" as const, href: "/tools/hash-generator" },
   ];
 
   return (
