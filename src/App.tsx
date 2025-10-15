@@ -48,6 +48,18 @@ import BlogGenerator from "./pages/tools/BlogGenerator";
 import AIImageGenerator from "./pages/tools/AIImageGenerator";
 import AIChatbot from "./pages/tools/AIChatbot";
 import VoiceCloner from "./pages/tools/VoiceCloner";
+import MP4ToMP3 from "./pages/tools/MP4ToMP3";
+import AVIToMP4 from "./pages/tools/AVIToMP4";
+import MOVToMP4 from "./pages/tools/MOVToMP4";
+import VideoCutter from "./pages/tools/VideoCutter";
+import VideoCompressor from "./pages/tools/VideoCompressor";
+import MergeVideos from "./pages/tools/MergeVideos";
+import AddSubtitles from "./pages/tools/AddSubtitles";
+import CropVideo from "./pages/tools/CropVideo";
+import AudioCutter from "./pages/tools/AudioCutter";
+import AudioJoiner from "./pages/tools/AudioJoiner";
+import WAVToMP3 from "./pages/tools/WAVToMP3";
+import VoiceRecorder from "./pages/tools/VoiceRecorder";
 
 const queryClient = new QueryClient();
 
@@ -102,6 +114,18 @@ const App = () => (
             <Route path="/tools/ai-image-generator" element={<AIImageGenerator />} />
             <Route path="/tools/ai-chatbot" element={<AIChatbot />} />
             <Route path="/tools/voice-cloner" element={<VoiceCloner />} />
+            <Route path="/tools/mp4-to-mp3" element={<MP4ToMP3 />} />
+            <Route path="/tools/avi-to-mp4" element={<AVIToMP4 />} />
+            <Route path="/tools/mov-to-mp4" element={<MOVToMP4 />} />
+            <Route path="/tools/video-cutter" element={<VideoCutter />} />
+            <Route path="/tools/video-compressor" element={<VideoCompressor />} />
+            <Route path="/tools/merge-videos" element={<MergeVideos />} />
+            <Route path="/tools/add-subtitles" element={<AddSubtitles />} />
+            <Route path="/tools/crop-video" element={<CropVideo />} />
+            <Route path="/tools/audio-cutter" element={<AudioCutter />} />
+            <Route path="/tools/audio-joiner" element={<AudioJoiner />} />
+            <Route path="/tools/wav-to-mp3" element={<WAVToMP3 />} />
+            <Route path="/tools/voice-recorder" element={<VoiceRecorder />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

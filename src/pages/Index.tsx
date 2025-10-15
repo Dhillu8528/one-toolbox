@@ -99,18 +99,18 @@ const Index = () => {
   ];
 
   const videoTools = [
-    { name: "MP4 to MP3", icon: Video, category: "video" as const },
-    { name: "AVI to MP4", icon: Video, category: "video" as const },
-    { name: "MOV to MP4", icon: Video, category: "video" as const },
-    { name: "Video Cutter", icon: Video, category: "video" as const },
-    { name: "Video Compressor", icon: Video, category: "video" as const },
-    { name: "Merge Videos", icon: Video, category: "video" as const },
-    { name: "Add Subtitles", icon: Video, category: "video" as const },
-    { name: "Crop Video", icon: Video, category: "video" as const },
-    { name: "Audio Cutter", icon: Music, category: "video" as const },
-    { name: "Audio Joiner", icon: Music, category: "video" as const },
-    { name: "WAV to MP3", icon: Music, category: "video" as const },
-    { name: "Voice Recorder", icon: Music, category: "video" as const },
+    { name: "MP4 to MP3", icon: Video, category: "video" as const, href: "/tools/mp4-to-mp3" },
+    { name: "AVI to MP4", icon: Video, category: "video" as const, href: "/tools/avi-to-mp4" },
+    { name: "MOV to MP4", icon: Video, category: "video" as const, href: "/tools/mov-to-mp4" },
+    { name: "Video Cutter", icon: Video, category: "video" as const, href: "/tools/video-cutter" },
+    { name: "Video Compressor", icon: Video, category: "video" as const, href: "/tools/video-compressor" },
+    { name: "Merge Videos", icon: Video, category: "video" as const, href: "/tools/merge-videos" },
+    { name: "Add Subtitles", icon: Video, category: "video" as const, href: "/tools/add-subtitles" },
+    { name: "Crop Video", icon: Video, category: "video" as const, href: "/tools/crop-video" },
+    { name: "Audio Cutter", icon: Music, category: "video" as const, href: "/tools/audio-cutter" },
+    { name: "Audio Joiner", icon: Music, category: "video" as const, href: "/tools/audio-joiner" },
+    { name: "WAV to MP3", icon: Music, category: "video" as const, href: "/tools/wav-to-mp3" },
+    { name: "Voice Recorder", icon: Music, category: "video" as const, href: "/tools/voice-recorder" },
   ];
 
   const developerTools = [
