@@ -80,22 +80,22 @@ const Index = () => {
   ];
 
   const aiTools = [
-    { name: "Text Summarizer", icon: Sparkles, category: "ai" as const },
-    { name: "Content Generator", icon: Sparkles, category: "ai" as const },
-    { name: "Grammar Check", icon: Sparkles, category: "ai" as const },
-    { name: "Translator", icon: Sparkles, category: "ai" as const },
-    { name: "Paraphraser", icon: Sparkles, category: "ai" as const },
-    { name: "Article Rewriter", icon: Sparkles, category: "ai" as const },
-    { name: "Caption Generator", icon: Sparkles, category: "ai" as const },
-    { name: "Hashtag Generator", icon: Sparkles, category: "ai" as const },
-    { name: "Text to Speech", icon: Sparkles, category: "ai" as const },
-    { name: "Speech to Text", icon: Sparkles, category: "ai" as const },
-    { name: "Poem Generator", icon: Sparkles, category: "ai" as const },
-    { name: "Story Writer", icon: Sparkles, category: "ai" as const },
-    { name: "Blog Generator", icon: Sparkles, category: "ai" as const },
-    { name: "AI Image Generator", icon: Sparkles, category: "ai" as const },
-    { name: "AI Chatbot", icon: Sparkles, category: "ai" as const },
-    { name: "Voice Cloner", icon: Sparkles, category: "ai" as const },
+    { name: "Text Summarizer", icon: Sparkles, category: "ai" as const, href: "/tools/text-summarizer" },
+    { name: "Content Generator", icon: Sparkles, category: "ai" as const, href: "/tools/content-generator" },
+    { name: "Grammar Check", icon: Sparkles, category: "ai" as const, href: "/tools/grammar-check" },
+    { name: "Translator", icon: Sparkles, category: "ai" as const, href: "/tools/translator" },
+    { name: "Paraphraser", icon: Sparkles, category: "ai" as const, href: "/tools/paraphraser" },
+    { name: "Article Rewriter", icon: Sparkles, category: "ai" as const, href: "/tools/article-rewriter" },
+    { name: "Caption Generator", icon: Sparkles, category: "ai" as const, href: "/tools/caption-generator" },
+    { name: "Hashtag Generator", icon: Sparkles, category: "ai" as const, href: "/tools/hashtag-generator" },
+    { name: "Text to Speech", icon: Sparkles, category: "ai" as const, href: "/tools/text-to-speech" },
+    { name: "Speech to Text", icon: Sparkles, category: "ai" as const, href: "/tools/speech-to-text" },
+    { name: "Poem Generator", icon: Sparkles, category: "ai" as const, href: "/tools/poem-generator" },
+    { name: "Story Writer", icon: Sparkles, category: "ai" as const, href: "/tools/story-writer" },
+    { name: "Blog Generator", icon: Sparkles, category: "ai" as const, href: "/tools/blog-generator" },
+    { name: "AI Image Generator", icon: Sparkles, category: "ai" as const, href: "/tools/ai-image-generator" },
+    { name: "AI Chatbot", icon: Sparkles, category: "ai" as const, href: "/tools/ai-chatbot" },
+    { name: "Voice Cloner", icon: Sparkles, category: "ai" as const, href: "/tools/voice-cloner" },
   ];
 
   const videoTools = [

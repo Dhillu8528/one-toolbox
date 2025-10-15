@@ -32,6 +32,22 @@ import PDFRotate from "./pages/tools/PDFRotate";
 import PDFToWord from "./pages/tools/PDFToWord";
 import WordToPDF from "./pages/tools/WordToPDF";
 import PDFToJPG from "./pages/tools/PDFToJPG";
+import TextSummarizer from "./pages/tools/TextSummarizer";
+import ContentGenerator from "./pages/tools/ContentGenerator";
+import GrammarCheck from "./pages/tools/GrammarCheck";
+import Translator from "./pages/tools/Translator";
+import Paraphraser from "./pages/tools/Paraphraser";
+import ArticleRewriter from "./pages/tools/ArticleRewriter";
+import CaptionGenerator from "./pages/tools/CaptionGenerator";
+import HashtagGenerator from "./pages/tools/HashtagGenerator";
+import TextToSpeech from "./pages/tools/TextToSpeech";
+import SpeechToText from "./pages/tools/SpeechToText";
+import PoemGenerator from "./pages/tools/PoemGenerator";
+import StoryWriter from "./pages/tools/StoryWriter";
+import BlogGenerator from "./pages/tools/BlogGenerator";
+import AIImageGenerator from "./pages/tools/AIImageGenerator";
+import AIChatbot from "./pages/tools/AIChatbot";
+import VoiceCloner from "./pages/tools/VoiceCloner";
 
 const queryClient = new QueryClient();
 
@@ -70,6 +86,22 @@ const App = () => (
             <Route path="/tools/pdf-to-word" element={<PDFToWord />} />
             <Route path="/tools/word-to-pdf" element={<WordToPDF />} />
             <Route path="/tools/pdf-to-jpg" element={<PDFToJPG />} />
+            <Route path="/tools/text-summarizer" element={<TextSummarizer />} />
+            <Route path="/tools/content-generator" element={<ContentGenerator />} />
+            <Route path="/tools/grammar-check" element={<GrammarCheck />} />
+            <Route path="/tools/translator" element={<Translator />} />
+            <Route path="/tools/paraphraser" element={<Paraphraser />} />
+            <Route path="/tools/article-rewriter" element={<ArticleRewriter />} />
+            <Route path="/tools/caption-generator" element={<CaptionGenerator />} />
+            <Route path="/tools/hashtag-generator" element={<HashtagGenerator />} />
+            <Route path="/tools/text-to-speech" element={<TextToSpeech />} />
+            <Route path="/tools/speech-to-text" element={<SpeechToText />} />
+            <Route path="/tools/poem-generator" element={<PoemGenerator />} />
+            <Route path="/tools/story-writer" element={<StoryWriter />} />
+            <Route path="/tools/blog-generator" element={<BlogGenerator />} />
+            <Route path="/tools/ai-image-generator" element={<AIImageGenerator />} />
+            <Route path="/tools/ai-chatbot" element={<AIChatbot />} />
+            <Route path="/tools/voice-cloner" element={<VoiceCloner />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
