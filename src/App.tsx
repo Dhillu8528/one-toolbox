@@ -60,6 +60,15 @@ import AudioCutter from "./pages/tools/AudioCutter";
 import AudioJoiner from "./pages/tools/AudioJoiner";
 import WAVToMP3 from "./pages/tools/WAVToMP3";
 import VoiceRecorder from "./pages/tools/VoiceRecorder";
+import CompressPDF from "./pages/tools/CompressPDF";
+import UnlockPDF from "./pages/tools/UnlockPDF";
+import ProtectPDF from "./pages/tools/ProtectPDF";
+import PDFToText from "./pages/tools/PDFToText";
+import ExcelToPDF from "./pages/tools/ExcelToPDF";
+import PowerPointToPDF from "./pages/tools/PowerPointToPDF";
+import DocxToTxt from "./pages/tools/DocxToTxt";
+import TxtToPDF from "./pages/tools/TxtToPDF";
+import OCRTool from "./pages/tools/OCRTool";
 
 const queryClient = new QueryClient();
 
@@ -126,6 +135,15 @@ const App = () => (
             <Route path="/tools/audio-joiner" element={<AudioJoiner />} />
             <Route path="/tools/wav-to-mp3" element={<WAVToMP3 />} />
             <Route path="/tools/voice-recorder" element={<VoiceRecorder />} />
+            <Route path="/tools/compress-pdf" element={<CompressPDF />} />
+            <Route path="/tools/unlock-pdf" element={<UnlockPDF />} />
+            <Route path="/tools/protect-pdf" element={<ProtectPDF />} />
+            <Route path="/tools/pdf-to-text" element={<PDFToText />} />
+            <Route path="/tools/excel-to-pdf" element={<ExcelToPDF />} />
+            <Route path="/tools/powerpoint-to-pdf" element={<PowerPointToPDF />} />
+            <Route path="/tools/docx-to-txt" element={<DocxToTxt />} />
+            <Route path="/tools/txt-to-pdf" element={<TxtToPDF />} />
+            <Route path="/tools/ocr-tool" element={<OCRTool />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
