@@ -6,32 +6,48 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { Copy } from "lucide-react";
+import { streamChat } from "@/lib/ai";
 
 export default function HashtagGenerator() {
   const [keyword, setKeyword] = useState("");
   const [hashtags, setHashtags] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const generate = () => {
+  const generate = async () => {
     if (!keyword) {
       toast.error("Please enter a keyword");
       return;
     }
 
-    const variations = [
-      keyword.toLowerCase(),
-      keyword + "life",
-      keyword + "vibes",
-      keyword + "daily",
-      keyword + "gram",
-      "the" + keyword,
-      keyword + "lover",
-      keyword + "addict",
-      keyword + "goals",
-      "love" + keyword,
-    ];
+    setIsLoading(true);
+    setHashtags([]);
 
-    setHashtags(variations.map(v => "#" + v.replace(/\s/g, "")));
-    toast.success("Hashtags generated!");
+    const prompt = `Generate 15 relevant and trending hashtags for "${keyword}". 
+    
+Format: Return only the hashtags, one per line, each starting with #. Include variations and related terms.`;
+
+    let fullResponse = "";
+    try {
+      await streamChat({
+        messages: [{ role: "user", content: prompt }],
+        onDelta: (chunk) => {
+          fullResponse += chunk;
+        },
+        onDone: () => {
+          const lines = fullResponse.split('\n').filter(l => l.trim() && l.includes('#'));
+          const hashtagList = lines.map(l => {
+            const match = l.match(/#\w+/);
+            return match ? match[0] : null;
+          }).filter(h => h) as string[];
+          setHashtags(hashtagList);
+          setIsLoading(false);
+          toast.success("Hashtags generated!");
+        }
+      });
+    } catch (error) {
+      setIsLoading(false);
+      toast.error("Failed to generate hashtags");
+    }
   };
 
   const copyAll = () => {
@@ -55,7 +71,9 @@ export default function HashtagGenerator() {
           />
         </div>
 
-        <Button onClick={generate} className="w-full">Generate Hashtags</Button>
+        <Button onClick={generate} className="w-full" disabled={isLoading}>
+          {isLoading ? "Generating..." : "Generate Hashtags"}
+        </Button>
 
         {hashtags.length > 0 && (
           <div className="space-y-4">

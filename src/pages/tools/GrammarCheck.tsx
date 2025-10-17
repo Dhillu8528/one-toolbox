@@ -4,38 +4,48 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import { streamChat } from "@/lib/ai";
 
 export default function GrammarCheck() {
   const [text, setText] = useState("");
   const [result, setResult] = useState("");
-  const [issues, setIssues] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const check = () => {
+  const check = async () => {
     if (!text.trim()) {
       toast.error("Please enter text to check");
       return;
     }
 
-    const foundIssues: string[] = [];
-    let corrected = text;
+    setIsLoading(true);
+    setResult("");
 
-    // Basic grammar checks
-    if (text.includes("  ")) {
-      foundIssues.push("Extra spaces found");
-      corrected = corrected.replace(/\s+/g, " ");
-    }
-    if (!/[.!?]$/.test(text.trim())) {
-      foundIssues.push("Missing ending punctuation");
-      corrected += ".";
-    }
-    if (/\bi\b/.test(text)) {
-      foundIssues.push("Lowercase 'i' should be capitalized");
-      corrected = corrected.replace(/\bi\b/g, "I");
-    }
+    const prompt = `Check this text for grammar, spelling, and punctuation errors. Provide the corrected version and list any issues found:
 
-    setIssues(foundIssues);
-    setResult(corrected);
-    toast.success(foundIssues.length > 0 ? `Found ${foundIssues.length} issues` : "No issues found!");
+"${text}"
+
+Format your response as:
+CORRECTED TEXT:
+[corrected text here]
+
+ISSUES FOUND:
+- [issue 1]
+- [issue 2]
+etc.`;
+
+    try {
+      await streamChat({
+        messages: [{ role: "user", content: prompt }],
+        onDelta: (chunk) => setResult(prev => prev + chunk),
+        onDone: () => {
+          setIsLoading(false);
+          toast.success("Grammar check complete!");
+        }
+      });
+    } catch (error) {
+      setIsLoading(false);
+      toast.error("Failed to check grammar");
+    }
   };
 
   return (
@@ -54,26 +64,17 @@ export default function GrammarCheck() {
           />
         </div>
 
-        <Button onClick={check} className="w-full">Check Grammar</Button>
-
-        {issues.length > 0 && (
-          <div className="space-y-2">
-            <Label>Issues Found</Label>
-            {issues.map((issue, i) => (
-              <div key={i} className="text-sm text-muted-foreground bg-muted p-2 rounded">
-                • {issue}
-              </div>
-            ))}
-          </div>
-        )}
+        <Button onClick={check} className="w-full" disabled={isLoading}>
+          {isLoading ? "Checking..." : "Check Grammar"}
+        </Button>
 
         {result && (
           <div>
-            <Label>Corrected Text</Label>
+            <Label>Result</Label>
             <Textarea
               value={result}
               readOnly
-              className="min-h-[200px] mt-2"
+              className="min-h-[300px] mt-2"
             />
           </div>
         )}

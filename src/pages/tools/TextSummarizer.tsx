@@ -5,24 +5,41 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { toast } from "sonner";
+import { streamChat } from "@/lib/ai";
 
 export default function TextSummarizer() {
   const [text, setText] = useState("");
   const [summary, setSummary] = useState("");
   const [length, setLength] = useState([50]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const summarize = () => {
+  const summarize = async () => {
     if (!text.trim()) {
       toast.error("Please enter text to summarize");
       return;
     }
 
-    const sentences = text.match(/[^.!?]+[.!?]+/g) || [];
-    const targetCount = Math.ceil((sentences.length * length[0]) / 100);
-    const summarized = sentences.slice(0, Math.max(1, targetCount)).join(" ");
-    
-    setSummary(summarized);
-    toast.success("Text summarized!");
+    setIsLoading(true);
+    setSummary("");
+
+    const lengthInstruction = length[0] < 30 ? "very brief" : length[0] < 60 ? "moderate" : "detailed";
+    const prompt = `Summarize the following text. Make it ${lengthInstruction} (approximately ${length[0]}% of original length):
+
+${text}`;
+
+    try {
+      await streamChat({
+        messages: [{ role: "user", content: prompt }],
+        onDelta: (chunk) => setSummary(prev => prev + chunk),
+        onDone: () => {
+          setIsLoading(false);
+          toast.success("Text summarized!");
+        }
+      });
+    } catch (error) {
+      setIsLoading(false);
+      toast.error("Failed to summarize text");
+    }
   };
 
   return (
@@ -53,7 +70,9 @@ export default function TextSummarizer() {
           />
         </div>
 
-        <Button onClick={summarize} className="w-full">Generate Summary</Button>
+        <Button onClick={summarize} className="w-full" disabled={isLoading}>
+          {isLoading ? "Summarizing..." : "Generate Summary"}
+        </Button>
 
         {summary && (
           <div>

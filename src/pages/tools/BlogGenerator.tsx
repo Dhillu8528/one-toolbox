@@ -6,31 +6,41 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
+import { streamChat } from "@/lib/ai";
 
 export default function BlogGenerator() {
   const [title, setTitle] = useState("");
   const [keywords, setKeywords] = useState("");
   const [tone, setTone] = useState("professional");
   const [blog, setBlog] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const templates = {
-    professional: `# {title}\n\nIn today's digital landscape, {keywords} have become increasingly important. This comprehensive guide explores the key aspects you need to understand.\n\n## Introduction\n\nLet's dive deep into {keywords} and discover practical insights that can transform your approach.\n\n## Key Takeaways\n\n- Understanding the fundamentals\n- Implementing best practices\n- Achieving measurable results`,
-    casual: `# {title}\n\nHey there! Let's talk about {keywords} - it's actually pretty cool when you get into it.\n\n## What's the Deal?\n\nSo here's the thing about {keywords}: they're more interesting than you might think. Let me break it down for you in a way that actually makes sense.\n\n## Bottom Line\n\nAt the end of the day, {keywords} matter, and here's why you should care.`,
-    technical: `# {title}\n\n## Abstract\n\nThis article provides an in-depth analysis of {keywords}, examining the underlying mechanisms and implementation strategies.\n\n## Methodology\n\nOur approach to {keywords} leverages industry-standard protocols and evidence-based practices.\n\n## Conclusion\n\nThe data demonstrates that {keywords} represent a significant advancement in the field.`,
-  };
-
-  const generate = () => {
+  const generate = async () => {
     if (!title || !keywords) {
       toast.error("Please fill in all fields");
       return;
     }
 
-    const generated = templates[tone as keyof typeof templates]
-      .replace(/{title}/g, title)
-      .replace(/{keywords}/g, keywords);
+    setIsLoading(true);
+    setBlog("");
+
+    const prompt = `Write a ${tone} blog post about "${title}". Focus on these keywords: ${keywords}. 
     
-    setBlog(generated);
-    toast.success("Blog post generated!");
+Make it engaging, informative, and well-structured with proper headings and sections. Write at least 400 words.`;
+
+    try {
+      await streamChat({
+        messages: [{ role: "user", content: prompt }],
+        onDelta: (chunk) => setBlog(prev => prev + chunk),
+        onDone: () => {
+          setIsLoading(false);
+          toast.success("Blog post generated!");
+        }
+      });
+    } catch (error) {
+      setIsLoading(false);
+      toast.error("Failed to generate blog post");
+    }
   };
 
   return (
@@ -73,7 +83,9 @@ export default function BlogGenerator() {
           </Select>
         </div>
 
-        <Button onClick={generate} className="w-full">Generate Blog Post</Button>
+        <Button onClick={generate} className="w-full" disabled={isLoading}>
+          {isLoading ? "Generating..." : "Generate Blog Post"}
+        </Button>
 
         {blog && (
           <div>

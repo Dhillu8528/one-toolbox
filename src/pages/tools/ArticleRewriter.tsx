@@ -4,32 +4,39 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import { streamChat } from "@/lib/ai";
 
 export default function ArticleRewriter() {
   const [article, setArticle] = useState("");
   const [rewritten, setRewritten] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const rewrite = () => {
+  const rewrite = async () => {
     if (!article.trim()) {
       toast.error("Please enter an article to rewrite");
       return;
     }
 
-    // Simple rewriter: reverse sentence order and shuffle some words
-    const sentences = article.match(/[^.!?]+[.!?]+/g) || [];
-    const rewrittenSentences = sentences.map(sentence => {
-      const words = sentence.trim().split(" ");
-      if (words.length > 5) {
-        // Swap some adjacent words
-        for (let i = 1; i < words.length - 1; i += 3) {
-          [words[i], words[i + 1]] = [words[i + 1], words[i]];
-        }
-      }
-      return words.join(" ");
-    });
+    setIsLoading(true);
+    setRewritten("");
 
-    setRewritten(rewrittenSentences.join(" "));
-    toast.success("Article rewritten!");
+    const prompt = `Rewrite the following article with fresh wording while preserving the key information and meaning. Make it engaging and unique:
+
+${article}`;
+
+    try {
+      await streamChat({
+        messages: [{ role: "user", content: prompt }],
+        onDelta: (chunk) => setRewritten(prev => prev + chunk),
+        onDone: () => {
+          setIsLoading(false);
+          toast.success("Article rewritten!");
+        }
+      });
+    } catch (error) {
+      setIsLoading(false);
+      toast.error("Failed to rewrite article");
+    }
   };
 
   return (
@@ -48,7 +55,9 @@ export default function ArticleRewriter() {
           />
         </div>
 
-        <Button onClick={rewrite} className="w-full">Rewrite Article</Button>
+        <Button onClick={rewrite} className="w-full" disabled={isLoading}>
+          {isLoading ? "Rewriting..." : "Rewrite Article"}
+        </Button>
 
         {rewritten && (
           <div>

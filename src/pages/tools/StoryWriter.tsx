@@ -6,32 +6,41 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
+import { streamChat } from "@/lib/ai";
 
 export default function StoryWriter() {
   const [character, setCharacter] = useState("");
   const [setting, setSetting] = useState("");
   const [genre, setGenre] = useState("adventure");
   const [story, setStory] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const templates = {
-    adventure: `Once upon a time, {character} embarked on a thrilling journey through {setting}. With courage in their heart, they faced countless challenges and discovered incredible treasures along the way.`,
-    mystery: `In the depths of {setting}, {character} stumbled upon a puzzling mystery. Clues were scattered everywhere, and each discovery led to more questions than answers.`,
-    romance: `Under the starlit sky of {setting}, {character} found something unexpected - a connection that would change everything. Their story was just beginning.`,
-    scifi: `In a future world within {setting}, {character} made a discovery that would alter the course of humanity. Technology and mystery intertwined in ways never imagined.`,
-  };
-
-  const generate = () => {
+  const generate = async () => {
     if (!character || !setting) {
       toast.error("Please fill in all fields");
       return;
     }
 
-    const generated = templates[genre as keyof typeof templates]
-      .replace(/{character}/g, character)
-      .replace(/{setting}/g, setting);
+    setIsLoading(true);
+    setStory("");
+
+    const prompt = `Write an engaging ${genre} story about "${character}" set in "${setting}". 
     
-    setStory(generated);
-    toast.success("Story generated!");
+Make it creative, vivid, and at least 300 words. Include dialogue, descriptive details, and an interesting plot.`;
+
+    try {
+      await streamChat({
+        messages: [{ role: "user", content: prompt }],
+        onDelta: (chunk) => setStory(prev => prev + chunk),
+        onDone: () => {
+          setIsLoading(false);
+          toast.success("Story generated!");
+        }
+      });
+    } catch (error) {
+      setIsLoading(false);
+      toast.error("Failed to generate story");
+    }
   };
 
   return (
@@ -75,7 +84,9 @@ export default function StoryWriter() {
           </Select>
         </div>
 
-        <Button onClick={generate} className="w-full">Generate Story</Button>
+        <Button onClick={generate} className="w-full" disabled={isLoading}>
+          {isLoading ? "Generating..." : "Generate Story"}
+        </Button>
 
         {story && (
           <div>

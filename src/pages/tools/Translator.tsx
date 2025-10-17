@@ -5,12 +5,14 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
+import { streamChat } from "@/lib/ai";
 
 export default function Translator() {
   const [text, setText] = useState("");
   const [fromLang, setFromLang] = useState("en");
   const [toLang, setToLang] = useState("es");
   const [translated, setTranslated] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const languages = [
     { code: "en", name: "English" },
@@ -23,17 +25,39 @@ export default function Translator() {
     { code: "ja", name: "Japanese" },
     { code: "zh", name: "Chinese" },
     { code: "ar", name: "Arabic" },
+    { code: "hi", name: "Hindi" },
+    { code: "ko", name: "Korean" },
   ];
 
-  const translate = () => {
+  const translate = async () => {
     if (!text) {
       toast.error("Please enter text to translate");
       return;
     }
 
-    // Mock translation (in production, use real translation API)
-    setTranslated(`[${toLang.toUpperCase()}] ${text}`);
-    toast.success("Text translated!");
+    setIsLoading(true);
+    setTranslated("");
+
+    const fromLangName = languages.find(l => l.code === fromLang)?.name;
+    const toLangName = languages.find(l => l.code === toLang)?.name;
+
+    const prompt = `Translate the following text from ${fromLangName} to ${toLangName}. Only provide the translation, no explanations:
+
+${text}`;
+
+    try {
+      await streamChat({
+        messages: [{ role: "user", content: prompt }],
+        onDelta: (chunk) => setTranslated(prev => prev + chunk),
+        onDone: () => {
+          setIsLoading(false);
+          toast.success("Text translated!");
+        }
+      });
+    } catch (error) {
+      setIsLoading(false);
+      toast.error("Failed to translate text");
+    }
   };
 
   return (
@@ -85,7 +109,9 @@ export default function Translator() {
           />
         </div>
 
-        <Button onClick={translate} className="w-full">Translate</Button>
+        <Button onClick={translate} className="w-full" disabled={isLoading}>
+          {isLoading ? "Translating..." : "Translate"}
+        </Button>
 
         {translated && (
           <div>

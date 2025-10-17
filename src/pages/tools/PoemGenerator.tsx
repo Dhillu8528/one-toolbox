@@ -6,27 +6,47 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
+import { streamChat } from "@/lib/ai";
 
 export default function PoemGenerator() {
   const [topic, setTopic] = useState("");
   const [style, setStyle] = useState("rhyme");
   const [poem, setPoem] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const templates = {
-    rhyme: `Roses are red, violets are {topic},\nIn my heart, you're always true,\nThe world is bright when I think of {topic}.`,
-    haiku: `{topic} in spring\nGentle whispers through the trees\nPeace fills the moment`,
-    free: `Oh {topic}, how you inspire\nIn every thought and every dream\nYou lift me higher and higher\nLike a never-ending stream`,
-  };
-
-  const generate = () => {
+  const generate = async () => {
     if (!topic) {
       toast.error("Please enter a topic");
       return;
     }
 
-    const generated = templates[style as keyof typeof templates].replace(/{topic}/g, topic);
-    setPoem(generated);
-    toast.success("Poem generated!");
+    setIsLoading(true);
+    setPoem("");
+
+    let styleInstruction = "";
+    if (style === "rhyme") {
+      styleInstruction = "Write a rhyming poem with consistent rhyme scheme (AABB or ABAB)";
+    } else if (style === "haiku") {
+      styleInstruction = "Write a traditional haiku (3 lines: 5-7-5 syllables)";
+    } else {
+      styleInstruction = "Write a free verse poem with natural flow and imagery";
+    }
+
+    const prompt = `${styleInstruction} about "${topic}". Make it beautiful and evocative.`;
+
+    try {
+      await streamChat({
+        messages: [{ role: "user", content: prompt }],
+        onDelta: (chunk) => setPoem(prev => prev + chunk),
+        onDone: () => {
+          setIsLoading(false);
+          toast.success("Poem generated!");
+        }
+      });
+    } catch (error) {
+      setIsLoading(false);
+      toast.error("Failed to generate poem");
+    }
   };
 
   return (
@@ -59,7 +79,9 @@ export default function PoemGenerator() {
           </Select>
         </div>
 
-        <Button onClick={generate} className="w-full">Generate Poem</Button>
+        <Button onClick={generate} className="w-full" disabled={isLoading}>
+          {isLoading ? "Generating..." : "Generate Poem"}
+        </Button>
 
         {poem && (
           <div>

@@ -6,29 +6,46 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { Copy } from "lucide-react";
+import { streamChat } from "@/lib/ai";
 
 export default function CaptionGenerator() {
   const [topic, setTopic] = useState("");
   const [style, setStyle] = useState("casual");
   const [captions, setCaptions] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const templates = {
-    casual: ["Just {topic} things 🌟", "Living my best {topic} life ✨", "{topic} vibes only 💫"],
-    professional: ["Exploring {topic} professionally", "Professional insights on {topic}", "Deep dive into {topic}"],
-    funny: ["{topic}? More like best thing ever! 😂", "When {topic} hits different 🤣", "POV: You discover {topic} 😅"],
-    inspirational: ["Let {topic} inspire you today ✨", "{topic} - because dreams matter 🌟", "Your {topic} journey starts now 💪"],
-  };
-
-  const generate = () => {
+  const generate = async () => {
     if (!topic) {
       toast.error("Please enter a topic");
       return;
     }
 
-    const selected = templates[style as keyof typeof templates];
-    const generated = selected.map(t => t.replace(/{topic}/g, topic));
-    setCaptions(generated);
-    toast.success("Captions generated!");
+    setIsLoading(true);
+    setCaptions([]);
+
+    const prompt = `Generate 5 engaging social media captions about "${topic}" in a ${style} style. 
+    
+Format: Return exactly 5 captions, one per line, numbered 1-5.`;
+
+    let fullResponse = "";
+    try {
+      await streamChat({
+        messages: [{ role: "user", content: prompt }],
+        onDelta: (chunk) => {
+          fullResponse += chunk;
+        },
+        onDone: () => {
+          const lines = fullResponse.split('\n').filter(l => l.trim());
+          const captionList = lines.map(l => l.replace(/^\d+\.\s*/, '').trim()).filter(l => l);
+          setCaptions(captionList.slice(0, 5));
+          setIsLoading(false);
+          toast.success("Captions generated!");
+        }
+      });
+    } catch (error) {
+      setIsLoading(false);
+      toast.error("Failed to generate captions");
+    }
   };
 
   const copy = (caption: string) => {
@@ -67,7 +84,9 @@ export default function CaptionGenerator() {
           </Select>
         </div>
 
-        <Button onClick={generate} className="w-full">Generate Captions</Button>
+        <Button onClick={generate} className="w-full" disabled={isLoading}>
+          {isLoading ? "Generating..." : "Generate Captions"}
+        </Button>
 
         {captions.length > 0 && (
           <div className="space-y-2">

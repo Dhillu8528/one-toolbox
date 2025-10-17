@@ -6,27 +6,45 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
+import { streamChat } from "@/lib/ai";
 
 export default function ContentGenerator() {
   const [topic, setTopic] = useState("");
   const [type, setType] = useState("paragraph");
   const [content, setContent] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const templates = {
-    paragraph: "This is a sample paragraph about {topic}. It provides informative content and detailed explanations to help readers understand the subject better.",
-    listicle: "Top 5 Things About {topic}:\n\n1. First important point\n2. Second key aspect\n3. Third significant detail\n4. Fourth essential element\n5. Fifth crucial factor",
-    howto: "How to {topic}:\n\nStep 1: Begin with the basics\nStep 2: Understand the fundamentals\nStep 3: Practice regularly\nStep 4: Learn from mistakes\nStep 5: Master the skill",
-  };
-
-  const generate = () => {
+  const generate = async () => {
     if (!topic) {
       toast.error("Please enter a topic");
       return;
     }
 
-    const generated = templates[type as keyof typeof templates].replace(/{topic}/g, topic);
-    setContent(generated);
-    toast.success("Content generated!");
+    setIsLoading(true);
+    setContent("");
+
+    let prompt = "";
+    if (type === "paragraph") {
+      prompt = `Write an informative paragraph about ${topic}. Make it detailed and engaging.`;
+    } else if (type === "listicle") {
+      prompt = `Create a listicle about ${topic}. Include at least 7 items with brief descriptions for each.`;
+    } else if (type === "howto") {
+      prompt = `Write a how-to guide about ${topic}. Include detailed step-by-step instructions.`;
+    }
+
+    try {
+      await streamChat({
+        messages: [{ role: "user", content: prompt }],
+        onDelta: (chunk) => setContent(prev => prev + chunk),
+        onDone: () => {
+          setIsLoading(false);
+          toast.success("Content generated!");
+        }
+      });
+    } catch (error) {
+      setIsLoading(false);
+      toast.error("Failed to generate content");
+    }
   };
 
   return (
@@ -59,7 +77,9 @@ export default function ContentGenerator() {
           </Select>
         </div>
 
-        <Button onClick={generate} className="w-full">Generate Content</Button>
+        <Button onClick={generate} className="w-full" disabled={isLoading}>
+          {isLoading ? "Generating..." : "Generate Content"}
+        </Button>
 
         {content && (
           <div>
